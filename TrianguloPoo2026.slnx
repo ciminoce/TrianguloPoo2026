@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TrianguloPoo.Servicios/TrianguloPoo.Servicios.csproj" />
+  <Project Path="TrianguloPoo.Windows/TrianguloPoo.Windows.csproj" />
+  <Project Path="TrianguloPoo2026.Datos/TrianguloPoo2026.Datos.csproj" />
+  <Project Path="TrianguloPoo2026.Entidades/TrianguloPoo2026.Entidades.csproj" />
+</Solution>
