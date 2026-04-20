@@ -25,6 +25,7 @@ namespace TrianguloPoo.Windows
 
                     DataGridViewRow r=new DataGridViewRow();
                     r.CreateCells(dgvTriangulos);
+
                     r.Cells[0].Value = triangulo.Lado1;
                     r.Cells[1].Value = triangulo.Lado2;
                     r.Cells[2].Value = triangulo.Lado3;
