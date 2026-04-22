@@ -24,17 +24,11 @@ namespace TrianguloPoo.Windows
                     Triangulo? triangulo = frm.GetTriangulo();
                     if (triangulo == null) return;
 
-                    DataGridViewRow r = new DataGridViewRow();
-                    r.CreateCells(dgvTriangulos);
+                    DataGridViewRow r = CrearFila(dgvTriangulos);
 
-                    r.Cells[0].Value = triangulo.Lado1;
-                    r.Cells[1].Value = triangulo.Lado2;
-                    r.Cells[2].Value = triangulo.Lado3;
-                    r.Cells[3].Value = triangulo.GetPerimetro();
-                    r.Cells[4].Value = triangulo.GetArea();
-                    r.Cells[5].Value = triangulo.GetTipo();
+                    SetearFila(r, triangulo);
 
-                    dgvTriangulos.Rows.Add(r);
+                    AgregarFila(dgvTriangulos, r);
 
                     _servicio.Agregar(triangulo);
                     lblCantidad.Text = _servicio.GetCantidad().ToString();
@@ -69,19 +63,35 @@ namespace TrianguloPoo.Windows
             if (_listaTriangulos is null) return;
             foreach (Triangulo t in _listaTriangulos)
             {
-                var r = new DataGridViewRow();
-                r.CreateCells(dgvTriangulos);
+                var r = CrearFila(dgvTriangulos);
+                SetearFila(r, t);
 
-                r.Cells[0].Value = t.Lado1;
-                r.Cells[1].Value = t.Lado2;
-                r.Cells[2].Value = t.Lado3;
-
-                r.Cells[3].Value = t.GetPerimetro();
-                r.Cells[4].Value = t.GetArea();
-                r.Cells[5].Value = t.GetTipo();
-
-                dgvTriangulos.Rows.Add(r);
+                AgregarFila(dgvTriangulos, r);
             }
+        }
+        //Métodos de la grilla
+        public DataGridViewRow CrearFila(DataGridView dgv)
+        {
+            DataGridViewRow r = new DataGridViewRow();
+            r.CreateCells(dgv);
+            return r;
+        }
+        public void SetearFila(DataGridViewRow r, Triangulo t)
+        {
+            r.Cells[0].Value = t.Lado1;
+            r.Cells[1].Value = t.Lado2;
+            r.Cells[2].Value = t.Lado3;
+
+            r.Cells[3].Value = t.GetPerimetro();
+            r.Cells[4].Value = t.GetArea();
+            r.Cells[5].Value = t.GetTipo();
+
+            //Agregado para luego borrar y/o modificar
+            r.Tag = t;
+        }
+        public void AgregarFila(DataGridView dgv, DataGridViewRow r)
+        {
+            dgv.Rows.Add(r);
         }
     }
 }
