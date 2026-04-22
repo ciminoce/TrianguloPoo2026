@@ -11,6 +11,7 @@ namespace TrianguloPoo.Servicios
         public ServicioTriangulos()
         {
             _repo = new RepositorioTriangulos();
+            
         }
         public void Agregar(Triangulo t)
         {

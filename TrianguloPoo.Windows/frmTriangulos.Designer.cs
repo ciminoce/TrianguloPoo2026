@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             toolStrip1 = new ToolStrip();
             tsbNuevo = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
@@ -45,8 +50,8 @@
             colPerimetro = new DataGridViewTextBoxColumn();
             colArea = new DataGridViewTextBoxColumn();
             colTipo = new DataGridViewTextBoxColumn();
-            label1 = new Label();
             lblCantidad = new Label();
+            label1 = new Label();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -134,6 +139,7 @@
             tsbCerrar.Size = new Size(52, 67);
             tsbCerrar.Text = "&Cerrar";
             tsbCerrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbCerrar.Click += tsbCerrar_Click;
             // 
             // splitContainer1
             // 
@@ -169,48 +175,52 @@
             // 
             // colLado1
             // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado1.DefaultCellStyle = dataGridViewCellStyle1;
             colLado1.HeaderText = "Lado 1";
             colLado1.Name = "colLado1";
             colLado1.ReadOnly = true;
             // 
             // colLado2
             // 
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado2.DefaultCellStyle = dataGridViewCellStyle2;
             colLado2.HeaderText = "Lado 2";
             colLado2.Name = "colLado2";
             colLado2.ReadOnly = true;
             // 
             // colLado3
             // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado3.DefaultCellStyle = dataGridViewCellStyle3;
             colLado3.HeaderText = "Lado3";
             colLado3.Name = "colLado3";
             colLado3.ReadOnly = true;
             // 
             // colPerimetro
             // 
+            colPerimetro.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colPerimetro.DefaultCellStyle = dataGridViewCellStyle4;
             colPerimetro.HeaderText = "Perímetro";
             colPerimetro.Name = "colPerimetro";
             colPerimetro.ReadOnly = true;
             // 
             // colArea
             // 
+            colArea.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colArea.DefaultCellStyle = dataGridViewCellStyle5;
             colArea.HeaderText = "Área";
             colArea.Name = "colArea";
             colArea.ReadOnly = true;
             // 
             // colTipo
             // 
+            colTipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             colTipo.HeaderText = "Tipo";
             colTipo.Name = "colTipo";
             colTipo.ReadOnly = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(32, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Cantidad:";
             // 
             // lblCantidad
             // 
@@ -222,6 +232,15 @@
             lblCantidad.TabIndex = 1;
             lblCantidad.Text = "0";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(32, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Cantidad:";
+            // 
             // frmTriangulos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -229,8 +248,11 @@
             ClientSize = new Size(800, 450);
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "frmTriangulos";
             Text = "frmTriangulos";
+            Load += frmTriangulos_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -256,13 +278,13 @@
         private ToolStripButton tsbCerrar;
         private SplitContainer splitContainer1;
         private DataGridView dgvTriangulos;
+        private Label lblCantidad;
+        private Label label1;
         private DataGridViewTextBoxColumn colLado1;
         private DataGridViewTextBoxColumn colLado2;
         private DataGridViewTextBoxColumn colLado3;
         private DataGridViewTextBoxColumn colPerimetro;
         private DataGridViewTextBoxColumn colArea;
         private DataGridViewTextBoxColumn colTipo;
-        private Label lblCantidad;
-        private Label label1;
     }
 }
