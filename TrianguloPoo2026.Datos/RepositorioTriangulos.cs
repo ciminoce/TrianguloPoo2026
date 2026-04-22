@@ -23,7 +23,7 @@ namespace TrianguloPoo2026.Datos
 
         private string ConstruirLinea(Triangulo t)
         {
-            return $"{t.Lado1}|{t.Lado2}|{t.Lado3}";
+            return $"{t.TrianguloId}|{t.Lado1}|{t.Lado2}|{t.Lado3}";
         }
 
         public List<Triangulo> GetLista() => _triangulos;
@@ -56,13 +56,14 @@ namespace TrianguloPoo2026.Datos
         private Triangulo? ConstruirTriangulo(string lineaLeida)
         {
             var campos=lineaLeida.Split('|');
-            if (campos.Length != 3) return null;
-            if (!double.TryParse(campos[0], CultureInfo.InvariantCulture, out var l1)) return null;
-            if (!double.TryParse(campos[1], CultureInfo.InvariantCulture, out var l2)) return null;
-            if (!double.TryParse(campos[2], CultureInfo.InvariantCulture, out var l3)) return null;
+            if (campos.Length != 4) return null;
+            if (!Guid.TryParse(campos[0],out var id))return null;
+            if (!double.TryParse(campos[1], CultureInfo.InvariantCulture, out var l1)) return null;
+            if (!double.TryParse(campos[2], CultureInfo.InvariantCulture, out var l2)) return null;
+            if (!double.TryParse(campos[3], CultureInfo.InvariantCulture, out var l3)) return null;
             try
             {
-                return new Triangulo(l1, l2, l3);
+                return new Triangulo(id,l1, l2, l3);
 
             }
             catch (Exception)

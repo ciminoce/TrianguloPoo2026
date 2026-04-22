@@ -18,6 +18,18 @@
             Lado3 = l3;
 
         }
+        public Triangulo(Guid id, double l1, double l2, double l3)
+        {
+            if (!EsValido(l1, l2, l3))
+            {
+                throw new ArgumentException("La suma de los lados debe ser superior al tercero y positivos");
+            }
+            TrianguloId = id;
+            Lado1 = l1;
+            Lado2 = l2;
+            Lado3 = l3;
+
+        }
         private bool EsValido(double l1, double l2, double l3)
 		{
 			return (l1 > 0 && l2 > 0 && l3 >0) && 

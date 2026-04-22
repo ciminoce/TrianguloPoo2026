@@ -78,13 +78,14 @@ namespace TrianguloPoo.Windows
         }
         public void SetearFila(DataGridViewRow r, Triangulo t)
         {
-            r.Cells[0].Value = t.Lado1;
-            r.Cells[1].Value = t.Lado2;
-            r.Cells[2].Value = t.Lado3;
+            r.Cells[0].Value = t.TrianguloId.ToString()[..8];
+            r.Cells[1].Value = t.Lado1;
+            r.Cells[2].Value = t.Lado2;
+            r.Cells[3].Value = t.Lado3;
 
-            r.Cells[3].Value = t.GetPerimetro();
-            r.Cells[4].Value = t.GetArea();
-            r.Cells[5].Value = t.GetTipo();
+            r.Cells[4].Value = t.Perimetro;
+            r.Cells[5].Value = t.Area;
+            r.Cells[6].Value = t.Tipo;
 
             //Agregado para luego borrar y/o modificar
             r.Tag = t;

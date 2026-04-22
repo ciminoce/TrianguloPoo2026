@@ -44,14 +44,15 @@
             tsbCerrar = new ToolStripButton();
             splitContainer1 = new SplitContainer();
             dgvTriangulos = new DataGridView();
+            lblCantidad = new Label();
+            label1 = new Label();
+            colId = new DataGridViewTextBoxColumn();
             colLado1 = new DataGridViewTextBoxColumn();
             colLado2 = new DataGridViewTextBoxColumn();
             colLado3 = new DataGridViewTextBoxColumn();
             colPerimetro = new DataGridViewTextBoxColumn();
             colArea = new DataGridViewTextBoxColumn();
             colTipo = new DataGridViewTextBoxColumn();
-            lblCantidad = new Label();
-            label1 = new Label();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -165,13 +166,38 @@
             dgvTriangulos.AllowUserToAddRows = false;
             dgvTriangulos.AllowUserToDeleteRows = false;
             dgvTriangulos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTriangulos.Columns.AddRange(new DataGridViewColumn[] { colLado1, colLado2, colLado3, colPerimetro, colArea, colTipo });
+            dgvTriangulos.Columns.AddRange(new DataGridViewColumn[] { colId, colLado1, colLado2, colLado3, colPerimetro, colArea, colTipo });
             dgvTriangulos.Dock = DockStyle.Fill;
             dgvTriangulos.Location = new Point(0, 0);
             dgvTriangulos.Name = "dgvTriangulos";
             dgvTriangulos.ReadOnly = true;
             dgvTriangulos.Size = new Size(800, 321);
             dgvTriangulos.TabIndex = 0;
+            // 
+            // lblCantidad
+            // 
+            lblCantidad.AutoSize = true;
+            lblCantidad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblCantidad.Location = new Point(93, 18);
+            lblCantidad.Name = "lblCantidad";
+            lblCantidad.Size = new Size(14, 15);
+            lblCantidad.TabIndex = 1;
+            lblCantidad.Text = "0";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(32, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Cantidad:";
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.Name = "colId";
+            colId.ReadOnly = true;
             // 
             // colLado1
             // 
@@ -222,25 +248,6 @@
             colTipo.Name = "colTipo";
             colTipo.ReadOnly = true;
             // 
-            // lblCantidad
-            // 
-            lblCantidad.AutoSize = true;
-            lblCantidad.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblCantidad.Location = new Point(93, 18);
-            lblCantidad.Name = "lblCantidad";
-            lblCantidad.Size = new Size(14, 15);
-            lblCantidad.TabIndex = 1;
-            lblCantidad.Text = "0";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(32, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Cantidad:";
-            // 
             // frmTriangulos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -280,6 +287,7 @@
         private DataGridView dgvTriangulos;
         private Label lblCantidad;
         private Label label1;
+        private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colLado1;
         private DataGridViewTextBoxColumn colLado2;
         private DataGridViewTextBoxColumn colLado3;
