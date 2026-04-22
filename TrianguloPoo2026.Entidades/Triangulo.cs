@@ -2,38 +2,17 @@
 {
     public class Triangulo
     {
-		private double lado1;
-
-		public double Lado1
-		{
-			get { return lado1; }
-			set { lado1 = value; }
-		}
-		private double lado2;
-
-		public double Lado2
-		{
-			get { return lado2; }
-			set { lado2 = value; }
-		}
-		private double lado3;
-
-		public double Lado3
-		{
-			get { return lado3; }
-			set { lado3 = value; }
-		}
+        public Guid TrianguloId { get;}
+        public double Lado1 { get; }
+        public double Lado2 { get; }
+        public double Lado3 { get; }
         public Triangulo(double l1, double l2, double l3)
         {
-			if(l1<=0 || l2<=0 || l3 <= 0)
-			{
-				throw new ArgumentException("Los lados deben ser positivos");
-			}
 			if (!EsValido(l1,l2,l3))
 			{
-				throw new ArgumentException("La suma de los lados debe ser superior al tercero");
-
+				throw new ArgumentException("La suma de los lados debe ser superior al tercero y positivos");
 			}
+            TrianguloId=Guid.NewGuid();
             Lado1 = l1;
             Lado2 = l2;
             Lado3 = l3;
@@ -41,29 +20,41 @@
         }
         private bool EsValido(double l1, double l2, double l3)
 		{
-			return (l1 + l2 > l3) && (l1 + l3 > l2) && (l2 + l3 > l1);
+			return (l1 > 0 && l2 > 0 && l3 >0) && 
+				(l1 + l2 > l3) && (l1 + l3 > l2)
+				&& (l2 + l3 > l1);
 
         }
-		public double GetPerimetro()=>lado1+lado2+lado3;
-		public double GetArea()
+		public double Perimetro
 		{
-			double sP = GetPerimetro() / 2;
-			return Math.Sqrt(sP * (sP - lado1) * (sP - lado2) * (sP - lado3));
+			get
+			{
+				return Lado1 + Lado2 + Lado3;
+            }
 		}
-		public string GetTipo()
+		public double Area
 		{
-			if(lado1==lado2 && lado2 == lado3)
+			get
 			{
-				return "Equilátero";
-			}else if(lado1!=lado2 && lado1!=lado3 && lado2!= lado3)
+                double sP = Perimetro / 2;
+                return Math.Sqrt(sP * (sP - Lado1) * (sP - Lado2) * (sP - Lado3));
+
+            }
+        }
+		public string Tipo
+		{
+			get
 			{
-				return "Escaleno";
-			}
-			return "Isósceles";
-		}
+                if (Lado1 == Lado2 && Lado2 == Lado3) return "Equilátero";
+                if (Lado1 != Lado2 && Lado1 != Lado3 && Lado2 != Lado3) return "Escaleno";
+                return "Isósceles";
+
+            }
+        }
+
         public override string ToString()
         {
-			return $"Lado 1: {lado1} Lado 2: {lado2} Lado 3: {lado3}";
+			return $"Lado 1: {Lado1} Lado 2: {Lado2} Lado 3: {Lado3}";
         }
     }
 }
