@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             toolStrip1 = new ToolStrip();
             tsbNuevo = new ToolStripButton();
             tsbBorrar = new ToolStripButton();
@@ -44,8 +45,6 @@
             tsbCerrar = new ToolStripButton();
             splitContainer1 = new SplitContainer();
             dgvTriangulos = new DataGridView();
-            lblCantidad = new Label();
-            label1 = new Label();
             colId = new DataGridViewTextBoxColumn();
             colLado1 = new DataGridViewTextBoxColumn();
             colLado2 = new DataGridViewTextBoxColumn();
@@ -53,6 +52,8 @@
             colPerimetro = new DataGridViewTextBoxColumn();
             colArea = new DataGridViewTextBoxColumn();
             colTipo = new DataGridViewTextBoxColumn();
+            lblCantidad = new Label();
+            label1 = new Label();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -90,6 +91,7 @@
             tsbBorrar.Size = new Size(52, 67);
             tsbBorrar.Text = "&Borrar";
             tsbBorrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbBorrar.Click += tsbBorrar_Click;
             // 
             // tsbEditar
             // 
@@ -165,14 +167,73 @@
             // 
             dgvTriangulos.AllowUserToAddRows = false;
             dgvTriangulos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
+            dgvTriangulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvTriangulos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTriangulos.Columns.AddRange(new DataGridViewColumn[] { colId, colLado1, colLado2, colLado3, colPerimetro, colArea, colTipo });
             dgvTriangulos.Dock = DockStyle.Fill;
             dgvTriangulos.Location = new Point(0, 0);
+            dgvTriangulos.MultiSelect = false;
             dgvTriangulos.Name = "dgvTriangulos";
             dgvTriangulos.ReadOnly = true;
+            dgvTriangulos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTriangulos.Size = new Size(800, 321);
             dgvTriangulos.TabIndex = 0;
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            // 
+            // colLado1
+            // 
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado1.DefaultCellStyle = dataGridViewCellStyle2;
+            colLado1.HeaderText = "Lado 1";
+            colLado1.Name = "colLado1";
+            colLado1.ReadOnly = true;
+            // 
+            // colLado2
+            // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado2.DefaultCellStyle = dataGridViewCellStyle3;
+            colLado2.HeaderText = "Lado 2";
+            colLado2.Name = "colLado2";
+            colLado2.ReadOnly = true;
+            // 
+            // colLado3
+            // 
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colLado3.DefaultCellStyle = dataGridViewCellStyle4;
+            colLado3.HeaderText = "Lado3";
+            colLado3.Name = "colLado3";
+            colLado3.ReadOnly = true;
+            // 
+            // colPerimetro
+            // 
+            colPerimetro.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colPerimetro.DefaultCellStyle = dataGridViewCellStyle5;
+            colPerimetro.HeaderText = "Perímetro";
+            colPerimetro.Name = "colPerimetro";
+            colPerimetro.ReadOnly = true;
+            // 
+            // colArea
+            // 
+            colArea.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colArea.DefaultCellStyle = dataGridViewCellStyle6;
+            colArea.HeaderText = "Área";
+            colArea.Name = "colArea";
+            colArea.ReadOnly = true;
+            // 
+            // colTipo
+            // 
+            colTipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            colTipo.HeaderText = "Tipo";
+            colTipo.Name = "colTipo";
+            colTipo.ReadOnly = true;
             // 
             // lblCantidad
             // 
@@ -192,61 +253,6 @@
             label1.Size = new Size(58, 15);
             label1.TabIndex = 0;
             label1.Text = "Cantidad:";
-            // 
-            // colId
-            // 
-            colId.HeaderText = "Id";
-            colId.Name = "colId";
-            colId.ReadOnly = true;
-            // 
-            // colLado1
-            // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colLado1.DefaultCellStyle = dataGridViewCellStyle1;
-            colLado1.HeaderText = "Lado 1";
-            colLado1.Name = "colLado1";
-            colLado1.ReadOnly = true;
-            // 
-            // colLado2
-            // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colLado2.DefaultCellStyle = dataGridViewCellStyle2;
-            colLado2.HeaderText = "Lado 2";
-            colLado2.Name = "colLado2";
-            colLado2.ReadOnly = true;
-            // 
-            // colLado3
-            // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colLado3.DefaultCellStyle = dataGridViewCellStyle3;
-            colLado3.HeaderText = "Lado3";
-            colLado3.Name = "colLado3";
-            colLado3.ReadOnly = true;
-            // 
-            // colPerimetro
-            // 
-            colPerimetro.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colPerimetro.DefaultCellStyle = dataGridViewCellStyle4;
-            colPerimetro.HeaderText = "Perímetro";
-            colPerimetro.Name = "colPerimetro";
-            colPerimetro.ReadOnly = true;
-            // 
-            // colArea
-            // 
-            colArea.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
-            colArea.DefaultCellStyle = dataGridViewCellStyle5;
-            colArea.HeaderText = "Área";
-            colArea.Name = "colArea";
-            colArea.ReadOnly = true;
-            // 
-            // colTipo
-            // 
-            colTipo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            colTipo.HeaderText = "Tipo";
-            colTipo.Name = "colTipo";
-            colTipo.ReadOnly = true;
             // 
             // frmTriangulos
             // 

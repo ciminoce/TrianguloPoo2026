@@ -1,5 +1,4 @@
-﻿using System.Formats.Asn1;
-using TrianguloPoo2026.Datos;
+﻿using TrianguloPoo2026.Datos;
 using TrianguloPoo2026.Entidades;
 
 namespace TrianguloPoo.Servicios
@@ -11,7 +10,11 @@ namespace TrianguloPoo.Servicios
         public ServicioTriangulos()
         {
             _repo = new RepositorioTriangulos();
-            
+
+        }
+        public void Borrar(Triangulo t)
+        {
+            _repo.Borrar(t);
         }
         public void Agregar(Triangulo t)
         {

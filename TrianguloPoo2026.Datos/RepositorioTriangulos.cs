@@ -11,6 +11,18 @@ namespace TrianguloPoo2026.Datos
         {
             _triangulos = LeerArchivo();
         }
+        public void Borrar(Triangulo t)
+        {
+            _triangulos.Remove(t);
+            GuardarTodo();
+        }
+
+        private void GuardarTodo()
+        {
+            var lineas = _triangulos.Select(t => $"{t.TrianguloId}|{t.Lado1}|{t.Lado2}|{t.Lado3}");
+            File.WriteAllLines(_rutaArchivo, lineas);
+        }
+
         public void Agregar(Triangulo t)
         {
             _triangulos.Add(t);

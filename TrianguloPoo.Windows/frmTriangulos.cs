@@ -61,6 +61,7 @@ namespace TrianguloPoo.Windows
         private void MostrarDatos()
         {
             if (_listaTriangulos is null) return;
+            lblCantidad.Text = _servicio.GetCantidad().ToString();
             foreach (Triangulo t in _listaTriangulos)
             {
                 var r = CrearFila(dgvTriangulos);
@@ -93,6 +94,35 @@ namespace TrianguloPoo.Windows
         public void AgregarFila(DataGridView dgv, DataGridViewRow r)
         {
             dgv.Rows.Add(r);
+        }
+        public void BorrarFila(DataGridView dgv, DataGridViewRow r)
+        {
+            dgv.Rows.Remove(r);
+        }
+
+        private void tsbBorrar_Click(object sender, EventArgs e)
+        {
+            //Veo si seleccioné alguna fila
+            if (dgvTriangulos.SelectedRows.Count == 0) return;
+            //obtengo la fila seleccionada
+            var filaSeleccionada=dgvTriangulos.SelectedRows[0];
+            if (filaSeleccionada.Tag == null) return;
+            Triangulo? triangulo = filaSeleccionada.Tag as Triangulo;
+            if (triangulo == null) return;
+            DialogResult dr=MessageBox.Show($"¿Desea dar de baja el triángulo {triangulo}?",
+                    "Confirmar",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.No) return;
+            _servicio.Borrar(triangulo);
+
+            BorrarFila(dgvTriangulos, filaSeleccionada);
+            lblCantidad.Text = _servicio.GetCantidad().ToString();
+            MessageBox.Show("Registro eliminado satisfactoriamente",
+                "Mensaje",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
         }
     }
 }
