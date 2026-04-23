@@ -1,4 +1,5 @@
-﻿using TrianguloPoo2026.Entidades;
+﻿using System.Globalization;
+using TrianguloPoo2026.Entidades;
 
 namespace TrianguloPoo.Windows
 {
@@ -9,7 +10,15 @@ namespace TrianguloPoo.Windows
         {
             InitializeComponent();
         }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (triangulo == null) return;
+            txtLado1.Text = triangulo.Lado1.ToString();
+            txtLado2.Text = triangulo.Lado2.ToString();
+            txtLado3.Text = triangulo.Lado3.ToString();
 
+        }
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (ValidarDatos())
@@ -42,13 +51,32 @@ namespace TrianguloPoo.Windows
         {
             bool esValido = true;
             errorProvider1.Clear();
+            if(!double.TryParse(txtLado1.Text,CultureInfo.InvariantCulture, out var l1))
+            {
+                esValido = false;
+                errorProvider1.SetError(txtLado1, "Número no válido");
+            }
+            if (!double.TryParse(txtLado2.Text, CultureInfo.InvariantCulture, out var l2))
+            {
+                esValido = false;
+                errorProvider1.SetError(txtLado2, "Número no válido");
+            }
+            if (!double.TryParse(txtLado3.Text, CultureInfo.InvariantCulture, out var l3))
+            {
+                esValido = false;
+                errorProvider1.SetError(txtLado3, "Número no válido");
+            }
+
             return esValido;
         }
         public Triangulo? GetTriangulo()
         {
             return triangulo;
         }
-
+        public void SetTriangulo(Triangulo t)
+        {
+            triangulo = t;
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

@@ -105,11 +105,11 @@ namespace TrianguloPoo.Windows
             //Veo si seleccioné alguna fila
             if (dgvTriangulos.SelectedRows.Count == 0) return;
             //obtengo la fila seleccionada
-            var filaSeleccionada=dgvTriangulos.SelectedRows[0];
+            var filaSeleccionada = dgvTriangulos.SelectedRows[0];
             if (filaSeleccionada.Tag == null) return;
             Triangulo? triangulo = filaSeleccionada.Tag as Triangulo;
             if (triangulo == null) return;
-            DialogResult dr=MessageBox.Show($"¿Desea dar de baja el triángulo {triangulo}?",
+            DialogResult dr = MessageBox.Show($"¿Desea dar de baja el triángulo {triangulo}?",
                     "Confirmar",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2);
@@ -123,6 +123,23 @@ namespace TrianguloPoo.Windows
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
 
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvTriangulos.SelectedRows.Count == 0) return;
+            //obtengo la fila seleccionada
+            var filaSeleccionada = dgvTriangulos.SelectedRows[0];
+            if (filaSeleccionada.Tag == null) return;
+            Triangulo? triangulo = filaSeleccionada.Tag as Triangulo;
+            if (triangulo == null) return;
+            using (frmTrianguloAe frm=new frmTrianguloAe() { Text="Editar Triángulo"})
+            {
+                frm.SetTriangulo(triangulo);
+                DialogResult dr = frm.ShowDialog(this);
+                if (dr == DialogResult.Cancel) return;
+
+            }
         }
     }
 }
