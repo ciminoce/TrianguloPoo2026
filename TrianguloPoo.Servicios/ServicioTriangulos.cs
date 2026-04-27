@@ -36,5 +36,29 @@ namespace TrianguloPoo.Servicios
                 x.TrianguloId!=t.TrianguloId &&
                 (x.Lado1==t.Lado1 && x.Lado2==t.Lado2 && x.Lado3==t.Lado3));
         }
+
+        public void Editar(Triangulo triangulo)
+        {
+            var listaTriangulos = _repo.GetLista();
+            if (!Existe(triangulo))
+            {
+                var index = listaTriangulos
+            .FindIndex(t => t.TrianguloId == triangulo.TrianguloId);
+                if (index != -1)
+                {
+                    listaTriangulos[index] = triangulo;
+                    _repo.GuardarTodo(listaTriangulos);
+                }
+                else
+                {
+                    throw new Exception("Triángulo no encontrado");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Triángulo existente");
+            }
+        }
     }
 }

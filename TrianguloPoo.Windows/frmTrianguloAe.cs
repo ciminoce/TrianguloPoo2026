@@ -28,8 +28,14 @@ namespace TrianguloPoo.Windows
                     //double l1 = double.Parse(txtLado1.Text);
                     //double l2 = double.Parse(txtLado2.Text);
                     //double l3 = double.Parse(txtLado3.Text);
-
-                    triangulo = new Triangulo(l1, l2, l3);
+                    if (triangulo == null)
+                    {
+                        triangulo = new Triangulo(l1, l2, l3);
+                    }
+                    else
+                    {
+                        triangulo=new Triangulo(triangulo.TrianguloId, l1, l2, l3);
+                    }
                     MessageBox.Show("Triángulo creado satisfactoriamente",
                         "Mensaje",
                         MessageBoxButtons.OK,

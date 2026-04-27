@@ -14,12 +14,12 @@ namespace TrianguloPoo2026.Datos
         public void Borrar(Triangulo t)
         {
             _triangulos.Remove(t);
-            GuardarTodo();
+            //GuardarTodo();
         }
 
-        private void GuardarTodo()
+        public void GuardarTodo(List<Triangulo> lista)
         {
-            var lineas = _triangulos.Select(t => ConstruirLinea(t));
+            var lineas = lista.Select(t => ConstruirLinea(t));
             File.WriteAllLines(_rutaArchivo, lineas);
         }
 

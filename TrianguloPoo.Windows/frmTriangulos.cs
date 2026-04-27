@@ -145,10 +145,23 @@ namespace TrianguloPoo.Windows
             if (triangulo == null) return;
             using (frmTrianguloAe frm=new frmTrianguloAe() { Text="Editar Triángulo"})
             {
-                frm.SetTriangulo(triangulo);
-                DialogResult dr = frm.ShowDialog(this);
-                if (dr == DialogResult.Cancel) return;
+                try
+                {
+                    frm.SetTriangulo(triangulo);
+                    DialogResult dr = frm.ShowDialog(this);
+                    if (dr == DialogResult.Cancel) return;
+                    triangulo = frm.GetTriangulo();
+                    if (triangulo == null) return;
+                    _servicio.Editar(triangulo);
+                    SetearFila(filaSeleccionada, triangulo);
 
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message,"Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
             }
         }
     }
