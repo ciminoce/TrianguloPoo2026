@@ -25,6 +25,7 @@ namespace TrianguloPoo2026.Datos
 
         public void Agregar(Triangulo t)
         {
+            //OJO: Ver que grabe como corresponde
             _triangulos.Add(t);
             using (var escritor=new StreamWriter(_rutaArchivo,true))
             {

@@ -6,7 +6,7 @@ namespace TrianguloPoo.Servicios
     public class ServicioTriangulos
     {
         private readonly RepositorioTriangulos _repo;
-
+        
         public ServicioTriangulos()
         {
             _repo = new RepositorioTriangulos();
