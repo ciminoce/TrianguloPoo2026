@@ -21,17 +21,27 @@ namespace TrianguloPoo.Windows
                     frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
-                    Triangulo? triangulo = frm.GetTriangulo();
-                    if (triangulo == null) return;
+                    try
+                    {
+                        Triangulo? triangulo = frm.GetTriangulo();
+                        if (triangulo == null) return;
+                        _servicio.Agregar(triangulo);
 
-                    DataGridViewRow r = CrearFila(dgvTriangulos);
+                        DataGridViewRow r = CrearFila(dgvTriangulos);
 
-                    SetearFila(r, triangulo);
+                        SetearFila(r, triangulo);
 
-                    AgregarFila(dgvTriangulos, r);
+                        AgregarFila(dgvTriangulos, r);
 
-                    _servicio.Agregar(triangulo);
-                    lblCantidad.Text = _servicio.GetCantidad().ToString();
+                        lblCantidad.Text = _servicio.GetCantidad().ToString();
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message, "Advertencia",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    } 
                 }
                 else
                 {
@@ -85,7 +95,7 @@ namespace TrianguloPoo.Windows
             r.Cells[3].Value = t.Lado3;
 
             r.Cells[4].Value = t.Perimetro;
-            r.Cells[5].Value = t.Area;
+            r.Cells[5].Value = t.Area.ToString("F2");
             r.Cells[6].Value = t.Tipo;
 
             //Agregado para luego borrar y/o modificar

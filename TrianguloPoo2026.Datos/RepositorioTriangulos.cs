@@ -19,7 +19,7 @@ namespace TrianguloPoo2026.Datos
 
         private void GuardarTodo()
         {
-            var lineas = _triangulos.Select(t => $"{t.TrianguloId}|{t.Lado1}|{t.Lado2}|{t.Lado3}");
+            var lineas = _triangulos.Select(t => ConstruirLinea(t));
             File.WriteAllLines(_rutaArchivo, lineas);
         }
 
@@ -35,8 +35,11 @@ namespace TrianguloPoo2026.Datos
 
         private string ConstruirLinea(Triangulo t)
         {
-            return $"{t.TrianguloId}|{t.Lado1}|{t.Lado2}|{t.Lado3}";
-        }
+            string lado1=t.Lado1.ToString(CultureInfo.InvariantCulture);
+            string lado2 = t.Lado2.ToString(CultureInfo.InvariantCulture);
+            string lado3 = t.Lado3.ToString(CultureInfo.InvariantCulture);
+            return $"{t.TrianguloId}|{lado1}|{lado2}|{lado3}";
+        } 
 
         public List<Triangulo> GetLista() => _triangulos;
         public int Cantidad() => _triangulos.Count;

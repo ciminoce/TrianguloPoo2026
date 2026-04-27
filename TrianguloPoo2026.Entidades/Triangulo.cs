@@ -6,16 +6,9 @@
         public double Lado1 { get; }
         public double Lado2 { get; }
         public double Lado3 { get; }
-        public Triangulo(double l1, double l2, double l3)
+        public Triangulo(double l1, double l2, double l3):
+            this(Guid.NewGuid(), l1, l2, l3)
         {
-			if (!EsValido(l1,l2,l3))
-			{
-				throw new ArgumentException("La suma de los lados debe ser superior al tercero y positivos");
-			}
-            TrianguloId=Guid.NewGuid();
-            Lado1 = l1;
-            Lado2 = l2;
-            Lado3 = l3;
 
         }
         public Triangulo(Guid id, double l1, double l2, double l3)
@@ -24,10 +17,12 @@
             {
                 throw new ArgumentException("La suma de los lados debe ser superior al tercero y positivos");
             }
+            var lados = new[] { l1, l2, l3 };
+            Array.Sort(lados);
             TrianguloId = id;
-            Lado1 = l1;
-            Lado2 = l2;
-            Lado3 = l3;
+            Lado1 = lados[0];
+            Lado2 = lados[1];
+            Lado3 = lados[2];
 
         }
         private bool EsValido(double l1, double l2, double l3)
@@ -53,13 +48,13 @@
 
             }
         }
-		public string Tipo
+		public TipoTriangulo Tipo
 		{
 			get
 			{
-                if (Lado1 == Lado2 && Lado2 == Lado3) return "Equilátero";
-                if (Lado1 != Lado2 && Lado1 != Lado3 && Lado2 != Lado3) return "Escaleno";
-                return "Isósceles";
+                if (Lado1 == Lado2 && Lado2 == Lado3) return TipoTriangulo.Equilátero;
+                if (Lado1 != Lado2 && Lado1 != Lado3 && Lado2 != Lado3) return TipoTriangulo.Escaleno;
+                return TipoTriangulo.Isósceles;
 
             }
         }
