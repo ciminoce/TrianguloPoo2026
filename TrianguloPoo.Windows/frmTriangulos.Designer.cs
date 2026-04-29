@@ -118,6 +118,7 @@
             tsbFiltrar.Size = new Size(52, 67);
             tsbFiltrar.Text = "&Filtrar";
             tsbFiltrar.TextImageRelation = TextImageRelation.ImageAboveText;
+            tsbFiltrar.Click += tsbFiltrar_Click;
             // 
             // tsbActualizar
             // 

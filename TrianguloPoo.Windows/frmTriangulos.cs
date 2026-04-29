@@ -1,4 +1,5 @@
-﻿using TrianguloPoo.Servicios;
+﻿using System.Security.Cryptography.X509Certificates;
+using TrianguloPoo.Servicios;
 using TrianguloPoo2026.Entidades;
 
 namespace TrianguloPoo.Windows
@@ -41,7 +42,7 @@ namespace TrianguloPoo.Windows
 
                         MessageBox.Show(ex.Message, "Advertencia",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    } 
+                    }
                 }
                 else
                 {
@@ -71,7 +72,8 @@ namespace TrianguloPoo.Windows
         private void MostrarDatos()
         {
             if (_listaTriangulos is null) return;
-            lblCantidad.Text = _servicio.GetCantidad().ToString();
+            lblCantidad.Text = _listaTriangulos.Count.ToString();
+            LimpiarGrilla(dgvTriangulos);
             foreach (Triangulo t in _listaTriangulos)
             {
                 var r = CrearFila(dgvTriangulos);
@@ -80,6 +82,12 @@ namespace TrianguloPoo.Windows
                 AgregarFila(dgvTriangulos, r);
             }
         }
+
+        private void LimpiarGrilla(DataGridView dgv)
+        {
+            dgv.Rows.Clear();
+        }
+
         //Métodos de la grilla
         public DataGridViewRow CrearFila(DataGridView dgv)
         {
@@ -143,7 +151,7 @@ namespace TrianguloPoo.Windows
             if (filaSeleccionada.Tag == null) return;
             Triangulo? triangulo = filaSeleccionada.Tag as Triangulo;
             if (triangulo == null) return;
-            using (frmTrianguloAe frm=new frmTrianguloAe() { Text="Editar Triángulo"})
+            using (frmTrianguloAe frm = new frmTrianguloAe() { Text = "Editar Triángulo" })
             {
                 try
                 {
@@ -159,10 +167,36 @@ namespace TrianguloPoo.Windows
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message,"Error",
+                    MessageBox.Show(ex.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } 
+                }
             }
+        }
+
+        private void tsbFiltrar_Click(object sender, EventArgs e)
+        {
+            using (frmFiltrarTriangulo frm = new frmFiltrarTriangulo() { Text="Seleccionar para Filtrar"})
+            {
+                DialogResult dr = frm.ShowDialog(this);
+                if (dr == DialogResult.OK)
+                {
+                    TipoTriangulo? tipo = frm.GetTipo();
+                    if (tipo == null) return;
+                    _listaTriangulos=_servicio.Filtrar(tipo);
+                    MostrarDatos();
+                    ManejarBotonesBarra(true);
+                }
+
+            }
+            
+        }
+        public void ManejarBotonesBarra(bool filtroActivo)
+        {
+            tsbNuevo.Enabled = !filtroActivo;
+            tsbBorrar.Enabled = !filtroActivo;
+            tsbEditar.Enabled = !filtroActivo;
+
+            tsbFiltrar.BackColor = Color.Orange;
         }
     }
 }

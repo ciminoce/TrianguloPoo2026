@@ -46,5 +46,15 @@ namespace TrianguloPoo.Servicios
             }
             _repo.Editar(triangulo);
         }
+
+        public List<Triangulo> Filtrar(TipoTriangulo? tipo)
+        {
+            var listaTriangulos = _repo.GetLista();
+            if (tipo!=null)
+            {
+                return listaTriangulos.Where(t => t.Tipo == tipo).ToList();
+            }
+            return null;
+        }
     }
 }
