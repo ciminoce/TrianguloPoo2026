@@ -175,20 +175,20 @@ namespace TrianguloPoo.Windows
 
         private void tsbFiltrar_Click(object sender, EventArgs e)
         {
-            using (frmFiltrarTriangulo frm = new frmFiltrarTriangulo() { Text="Seleccionar para Filtrar"})
+            using (frmFiltrarTriangulo frm = new frmFiltrarTriangulo() { Text = "Seleccionar para Filtrar" })
             {
                 DialogResult dr = frm.ShowDialog(this);
                 if (dr == DialogResult.OK)
                 {
                     TipoTriangulo? tipo = frm.GetTipo();
                     if (tipo == null) return;
-                    _listaTriangulos=_servicio.Filtrar(tipo);
+                    _listaTriangulos = _servicio.Filtrar(tipo);
                     MostrarDatos();
                     ManejarBotonesBarra(true);
                 }
 
             }
-            
+
         }
         public void ManejarBotonesBarra(bool filtroActivo)
         {
@@ -196,7 +196,16 @@ namespace TrianguloPoo.Windows
             tsbBorrar.Enabled = !filtroActivo;
             tsbEditar.Enabled = !filtroActivo;
 
-            tsbFiltrar.BackColor = Color.Orange;
+            tsbFiltrar.BackColor = filtroActivo
+                ? Color.Orange
+                : SystemColors.Control;
+        }
+
+        private void tsbActualizar_Click(object sender, EventArgs e)
+        {
+            _listaTriangulos = _servicio.GetLista();
+            MostrarDatos();
+            ManejarBotonesBarra(false);
         }
     }
 }
