@@ -40,25 +40,11 @@ namespace TrianguloPoo.Servicios
         public void Editar(Triangulo triangulo)
         {
             var listaTriangulos = _repo.GetLista();
-            if (!Existe(triangulo))
-            {
-                var index = listaTriangulos
-            .FindIndex(t => t.TrianguloId == triangulo.TrianguloId);
-                if (index != -1)
-                {
-                    listaTriangulos[index] = triangulo;
-                    _repo.GuardarTodo(listaTriangulos);
-                }
-                else
-                {
-                    throw new Exception("Triángulo no encontrado");
-                }
-
-            }
-            else
+            if (Existe(triangulo))
             {
                 throw new Exception("Triángulo existente");
             }
+            _repo.Editar(triangulo);
         }
     }
 }

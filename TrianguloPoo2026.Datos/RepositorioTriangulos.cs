@@ -86,5 +86,20 @@ namespace TrianguloPoo2026.Datos
                 return null;
             }
         }
+        public void Editar(Triangulo triangulo)
+        {
+            var index = _triangulos
+                .FindIndex(t => t.TrianguloId == triangulo.TrianguloId);
+            if (index != -1)
+            {
+                _triangulos[index] = triangulo;
+                GuardarTodo(_triangulos);
+            }
+            else
+            {
+                throw new Exception("Triángulo no encontrado");
+            }
+
+        }
     }
 }
