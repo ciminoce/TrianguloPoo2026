@@ -87,7 +87,7 @@
             txtLado3.Location = new Point(90, 73);
             txtLado3.Name = "txtLado3";
             txtLado3.Size = new Size(100, 23);
-            txtLado3.TabIndex = 1;
+            txtLado3.TabIndex = 2;
             // 
             // btnOK
             // 
@@ -95,7 +95,7 @@
             btnOK.Location = new Point(41, 124);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 54);
-            btnOK.TabIndex = 2;
+            btnOK.TabIndex = 3;
             btnOK.Text = "OK";
             btnOK.TextImageRelation = TextImageRelation.ImageAboveText;
             btnOK.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             btnCancelar.Location = new Point(170, 124);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 54);
-            btnCancelar.TabIndex = 2;
+            btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnCancelar.UseVisualStyleBackColor = true;
@@ -119,8 +119,10 @@
             // 
             // frmTrianguloAe
             // 
+            AcceptButton = btnOK;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancelar;
             ClientSize = new Size(289, 222);
             Controls.Add(btnCancelar);
             Controls.Add(btnOK);

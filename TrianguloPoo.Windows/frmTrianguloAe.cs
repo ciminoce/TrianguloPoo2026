@@ -25,9 +25,6 @@ namespace TrianguloPoo.Windows
             {
                 try
                 {
-                    //double l1 = double.Parse(txtLado1.Text);
-                    //double l2 = double.Parse(txtLado2.Text);
-                    //double l3 = double.Parse(txtLado3.Text);
                     if (triangulo == null)
                     {
                         triangulo = new Triangulo(l1, l2, l3);
@@ -57,6 +54,9 @@ namespace TrianguloPoo.Windows
         {
             bool esValido = true;
             errorProvider1.Clear();
+            txtLado1.Text = ReemplazarComa(txtLado1.Text);
+            txtLado2.Text = ReemplazarComa(txtLado2.Text);
+            txtLado3.Text = ReemplazarComa(txtLado3.Text);
             if(!double.TryParse(txtLado1.Text,CultureInfo.InvariantCulture, out l1))
             {
                 esValido = false;
@@ -75,6 +75,12 @@ namespace TrianguloPoo.Windows
 
             return esValido;
         }
+
+        private string ReemplazarComa(string text)
+        {
+            return text.Replace(",", ".");
+        }
+
         public Triangulo? GetTriangulo()
         {
             return triangulo;
