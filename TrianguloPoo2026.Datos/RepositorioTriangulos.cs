@@ -13,8 +13,13 @@ namespace TrianguloPoo2026.Datos
         }
         public void Borrar(Triangulo t)
         {
+            var trianguloEnLista = GetById(t.TrianguloId);
+            if (trianguloEnLista==null)
+            {
+                throw new ArgumentException("Triangulo no encontrado");
+            }
             _triangulos.Remove(t);
-            //GuardarTodo();
+            GuardarTodo(_triangulos);
         }
 
         public void GuardarTodo(List<Triangulo> lista)
@@ -39,7 +44,10 @@ namespace TrianguloPoo2026.Datos
             string lado3 = t.Lado3.ToString(CultureInfo.InvariantCulture);
             return $"{t.TrianguloId}|{lado1}|{lado2}|{lado3}";
         } 
-
+        public Triangulo? GetById(Guid id)
+        {
+            return _triangulos.FirstOrDefault(t => t.TrianguloId == id);
+        }
         public List<Triangulo> GetLista() => _triangulos;
         public int Cantidad() => _triangulos.Count;
         private List<Triangulo> LeerArchivo()
