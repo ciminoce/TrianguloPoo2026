@@ -87,5 +87,15 @@ namespace TrianguloPoo.Windows
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        public void PrepararParaOtro()
+        {
+            txtLado1.Clear();
+            txtLado2.Clear();
+            txtLado3.Clear();
+
+            triangulo = null;
+            txtLado1.Focus();
+        }
     }
 }

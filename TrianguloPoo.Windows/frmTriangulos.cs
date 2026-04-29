@@ -18,35 +18,47 @@ namespace TrianguloPoo.Windows
         {
             using (var frm = new frmTrianguloAe() { Text = "Nuevo Triángulo" })
             {
-                DialogResult dr =
-                    frm.ShowDialog(this);
-                if (dr == DialogResult.OK)
+                bool continuarAgregando = true;
+                while (continuarAgregando)
                 {
-                    try
+                    DialogResult dr =
+                        frm.ShowDialog(this);
+                    if (dr == DialogResult.OK)
                     {
-                        Triangulo? triangulo = frm.GetTriangulo();
-                        if (triangulo == null) return;
-                        _servicio.Agregar(triangulo);
+                        try
+                        {
+                            Triangulo? triangulo = frm.GetTriangulo();
+                            if (triangulo == null) return;
+                            _servicio.Agregar(triangulo);
+                            DataGridViewRow r = CrearFila(dgvTriangulos);
+                            SetearFila(r, triangulo);
+                            AgregarFila(dgvTriangulos, r);
+                            lblCantidad.Text = _servicio.GetCantidad().ToString();
+                            var continuar=MessageBox.Show("¿Desea agregar otro triángulo?",
+                                "Confirmar",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                MessageBoxDefaultButton.Button2);
+                            if (continuar==DialogResult.Yes)
+                            {
+                                frm.PrepararParaOtro();
+                            }
+                            else
+                            {
+                                continuarAgregando=false;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
 
-                        DataGridViewRow r = CrearFila(dgvTriangulos);
-
-                        SetearFila(r, triangulo);
-
-                        AgregarFila(dgvTriangulos, r);
-
-                        lblCantidad.Text = _servicio.GetCantidad().ToString();
-
+                            MessageBox.Show(ex.Message, "Advertencia",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-
-                        MessageBox.Show(ex.Message, "Advertencia",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        continuarAgregando = false;
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Joder!!");
+
                 }
             }
         }
