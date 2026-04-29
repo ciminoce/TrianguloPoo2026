@@ -25,13 +25,11 @@ namespace TrianguloPoo2026.Datos
 
         public void Agregar(Triangulo t)
         {
-            //OJO: Ver que grabe como corresponde
             _triangulos.Add(t);
-            using (var escritor=new StreamWriter(_rutaArchivo,true))
-            {
-                string linea = ConstruirLinea(t);
-                escritor.WriteLine(linea);
-            }
+
+            string linea = ConstruirLinea(t);
+
+            File.AppendAllLines(_rutaArchivo, new[] { linea });
         }
 
         private string ConstruirLinea(Triangulo t)
